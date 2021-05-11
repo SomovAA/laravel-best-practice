@@ -1,0 +1,75 @@
+version: "3.8"
+
+services:
+  nginx:
+    build:
+      context: docker/nginx
+      dockerfile: Dockerfile
+    container_name: "${PROJECT_NAME}-nginx"
+    restart: always
+    ports:
+      - "${EXTERNAL_NGINX_PORT}:${INTERNAL_NGINX_PORT}"
+    volumes:
+      - ./api:/api
+    working_dir: /api
+    networks:
+      - frontend-network
+    depends_on:
+      - php-fpm
+
+  php-cli:
+    build:
+      context: docker/php-cli
+      dockerfile: Dockerfile
+    container_name: "${PROJECT_NAME}-php-cli"
+    user: "${USER_UID:-1000}:${USER_GID:-1000}"
+    tty: true
+    volumes:
+      - ./api:/api
+    working_dir: /api
+    networks:
+      - backend-network
+    depends_on:
+      - postgres
+
+  php-fpm:
+    build:
+      context: docker/php-fpm
+      dockerfile: Dockerfile
+    container_name: "${PROJECT_NAME}-php-fpm"
+    user: "${USER_UID:-1000}:${USER_GID:-1000}"
+    volumes:
+      - ./api:/api
+    working_dir: /api
+    networks:
+      - frontend-network
+      - backend-network
+    depends_on:
+      - postgres
+
+  postgres:
+    build:
+      context: docker/postgres
+      dockerfile: Dockerfile
+    container_name: "${PROJECT_NAME}-postgres"
+    restart: always
+    ports:
+      - "${EXTERNAL_DB_PORT}:${DATABASE_PORT}"
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - backend-network
+
+volumes:
+  postgres-data:
+    driver: local
+
+networks:
+  frontend-network:
+    driver: bridge
+  backend-network:
+    driver: bridge

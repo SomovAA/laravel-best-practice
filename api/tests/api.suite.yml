@@ -1,0 +1,14 @@
+actor: ApiTester
+namespace: Tests\Support
+path: Api
+modules:
+  enabled:
+    - Laravel:
+      environment_file:
+        .env.test
+    - \Tests\Support\Helper\Api
+    - REST:
+        url: /api/v1
+        depends: Laravel
+        part: Json
+

@@ -1,0 +1,9 @@
+actor: FunctionalTester
+namespace: Tests\Support
+modules:
+  enabled:
+    - Asserts
+    - \Tests\Support\Helper\Functional
+    - Laravel:
+        .env.test
+path: Functional

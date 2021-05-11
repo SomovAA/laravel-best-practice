@@ -1,0 +1,11 @@
+/public/storage
+/storage/*.key
+/vendor
+/tests/_output
+/tests/_support/_generated
+.env
+.env.backup
+.env.test
+.env.stage
+.env.prod
+.phpunit.result.cache

@@ -1,0 +1,25 @@
+### test
+
+POST {{host}}/api/v1/example/test
+Content-Type: application/json
+Accept: application/json
+
+{}
+
+### user view using service
+GET {{host}}/api/v1/user/service/view?id=2
+Content-Type: application/json
+Accept: application/json
+
+{}
+
+### user create using service
+POST {{host}}/api/v1/user/service/create
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Vania",
+  "email": "ya.sdelal@gmail.com",
+  "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi"
+}

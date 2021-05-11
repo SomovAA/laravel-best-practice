@@ -1,0 +1,14 @@
+actor: UnitTester
+namespace: Tests\Support
+path: Unit/Integration
+modules:
+  enabled:
+    - Asserts
+    - \Tests\Support\Helper\Unit
+    - Laravel:
+        environment_file:
+          .env.test
+coverage:
+  enabled: true
+  include:
+    - app/*

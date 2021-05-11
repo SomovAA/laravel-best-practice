@@ -1,0 +1,10 @@
+actor: UnitTester
+namespace: Tests\Support
+path: Stage/Unit/Integration
+modules:
+  enabled:
+    - Asserts
+    - \Tests\Support\Helper\Unit
+    - Laravel:
+        environment_file:
+          .env.stage

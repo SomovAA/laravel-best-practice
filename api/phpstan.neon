@@ -1,0 +1,37 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+	level: 8
+	fileExtensions:
+		- php
+	excludePaths:
+		- tests/_data/*
+		- tests/_output/*
+		- tests/_support/*
+		- tests/_envs/*
+		- bootstrap/cache/*
+	paths:
+		- config
+		- database
+		- public
+		- ecs.php
+		- app
+		- tests
+		- bootstrap
+		- resources
+		- routes
+		- server.php
+	checkMissingIterableValueType: false
+	checkGenericClassInNonGenericObjectType: false
+	reportUnmatchedIgnoredErrors: false
+	ignoreErrors:
+	    -
+	        message: '#Call to an undefined method Tests\\Support.+#'
+	        path: tests/*
+	    -
+	        message: '#Undefined variable: \$this#'
+	        path: routes/console.php
+	    - '#Unsafe usage of new static\(\).#'
+	    - '#Call to an undefined method Illuminate\\Support\\HigherOrderTapProxy<mixed>::send\(\)#'
+	    - '#Access to protected property Illuminate\\Routing\\RouteFileRegistrar::\$router\.#'
