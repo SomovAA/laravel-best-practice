@@ -6,7 +6,7 @@ sudo apt-get install git docker docker-compose
 # Install
 1 Clone the project.
 ```bash
-git clone ...
+git clone https://github.com/SomovAA/laravel-best-practice
 ```
 2 Set the environments
 ```bash
